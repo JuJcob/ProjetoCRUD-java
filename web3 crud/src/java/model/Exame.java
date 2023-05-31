@@ -6,7 +6,17 @@ public class Exame {
     private double valor;
     private String especialidade;
 
+    public Exame(){
+    }
+    
     public Exame(String tipo, double valor, String especialidade) {
+        this.tipo = tipo;
+        this.valor = valor;
+        this.especialidade = especialidade;
+    }
+    
+    public Exame(int cod, String tipo, double valor, String especialidade) {
+        this.codExame = cod;
         this.tipo = tipo;
         this.valor = valor;
         this.especialidade = especialidade;

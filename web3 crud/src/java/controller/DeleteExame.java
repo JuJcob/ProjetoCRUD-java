@@ -8,52 +8,38 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.User;
+import model.ExameDAO;
 
-@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
-public class LoginController extends HttpServlet {
 
-    //Atributos
-    private String user;
-    private String pass;
+@WebServlet(name = "DeleteExame", urlPatterns = {"/DeleteExame"})
+public class DeleteExame extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        this.user = request.getParameter("user");
-        this.pass = request.getParameter("pass");
-
-        User userNew = new User(this.user, this.pass);
-
+        
+        int cod = Integer.parseInt(request.getParameter("cod"));
+        
         try {
-
-            if (userNew.isLogged()) {
-                HttpSession session = request.getSession();
-                session.setAttribute("userNewSession", userNew);
-                request.setAttribute("userNew", userNew);
-                request.getRequestDispatcher("home.jsp")
-                        .forward(request, response);
-            } else {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("<!DOCTYPE html>");
-                    out.println("<html>");
-                    out.println("<head>");
-                    out.println("<title>Exames</title>");
-                    out.println("</head>");
-                    out.println("<body>");
-                    out.println("<script>");
-                    out.println("alert('Acesso negado');");
-                    out.println("window.location.replace('index.jsp');");
-                    out.println("</script>");
-                    out.println("</body>");
-                    out.println("</html>");
-                }
+            ExameDAO edao = new ExameDAO();
+            edao.deleteExame(cod);
+            response.sendRedirect("lista.jsp");
+            
+        } catch(SQLException | ClassNotFoundException catapimbas) {
+        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet DeleteExame</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Erro na exclusão :( <hr></h1>");
+            out.println("<h5>"+ catapimbas +"</h5>");
+            out.println("</body>");
+            out.println("</html>");
             }
-        } catch (SQLException | ClassNotFoundException erro) {
-            PrintWriter out = response.getWriter();
-            out.print("Ocorreu algum erro :(");
         }
     }
 

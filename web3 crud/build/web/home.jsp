@@ -12,8 +12,54 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Exames</title>
+       <style>
+  body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  
+  button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #4CAF50;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+        <meta charset="UTF-8">
+        <title>Bem vindo paciente</title>
     </head>
     <body>
         <p>
@@ -22,12 +68,15 @@
                                         ? userSession.getUserName() 
                                         : "visitante"
                           %>
-        <button onclick="window.location.href='session/logout.jsp'">Logout</button>
+                          
+        <br>             
+        <br><button onclick="window.location.href='session/logout.jsp'">Logout</button>
         </p>
         <hr>
         <button onclick="window.location.href='cadastro.jsp'">
             CADASTRAR
         </button>
+        <br>
         <button onclick="window.location.href='lista.jsp'">
             LISTAR
         </button>
